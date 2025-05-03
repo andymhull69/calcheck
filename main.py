@@ -65,7 +65,8 @@ def get_slots_with_status(calendar_id, date, work_start, work_end):
                         display_name = attendee.get('displayName') or email
                         client_contact = f"<a href='mailto:{email}'>{display_name}</a>"
                         break
-                status = client_contact or "Booked"
+                description = event.get('description', '')
+                status = f"{client_contact}<br><details><summary>More details</summary><small>{description}</small></details>" if client_contact else "Booked"
                 slot_link = f"https://calendar.google.com/calendar/u/0/r/day/{cursor.year}/{cursor.month:02}/{cursor.day:02}?pli=1#main_7|{cursor.strftime('%H')}"
                 break
 

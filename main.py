@@ -196,7 +196,9 @@ def web_output():
                     {% for slot in day.slots %}
                     <li style="color: {{ 'green' if 'Free' in slot[2] else 'red' }};">
                         <a href="{{ slot[3] }}" target="_blank">{{ slot[0] }} - {{ slot[1] }}</a>
-                        {% if 'mailto:' in slot[2] %}<br><small>Booked by: {{ slot[2]|safe }}</small>{% else %}: {{ slot[2]|safe }}{% endif %}
+                        {% if 'mailto:' in slot[2] %}
+                        <details><summary>Details</summary><small>Booked by: {{ slot[2]|safe }}</small></details>
+                        {% else %}: {{ slot[2]|safe }}{% endif %}
                     </li>
                     {% endfor %}
                 </ul>

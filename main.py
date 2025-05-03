@@ -207,6 +207,14 @@ def web_output():
     '''
     return render_template_string(html_template, data=weekly_data)
 
+@app.route('/trigger/<secret>')
+def trigger_bot(secret):
+    if secret != TRIGGER_SECRET:
+        abort(403)
+    message = generate_text_summary()
+    send_telegram_message(message)
+    return 'Telegram update sent.'
+
 @app.route('/health')
 def health():
     return "OK", 200

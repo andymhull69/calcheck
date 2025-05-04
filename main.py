@@ -111,9 +111,8 @@ def generate_weekly_slots():
 def generate_text_summary():
     tz = pytz.timezone(TIMEZONE)
     today = datetime.now(tz).date()
-    message = "🗕 Available 1-Hour Free Slots This Week:
+    message = "🗕 Available 1-Hour Free Slots This Week:\n\n"
 
-"
 
     for i in range(7):
         day = today + timedelta(days=i)

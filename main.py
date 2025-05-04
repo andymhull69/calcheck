@@ -16,7 +16,7 @@ WORK_END = "17:00"
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_USER_ID = os.getenv('TELEGRAM_USER_ID')
 TRIGGER_SECRET = os.getenv('TRIGGER_SECRET')
-CALENDLY_URL = 'https://calendly.com/ch-sports-rehab/30min'
+CALENDLY_URL = 'https://calendly.com/ch-sports-rehab/session'
 
 # === SETUP ===
 creds = service_account.Credentials.from_service_account_file(

@@ -123,13 +123,12 @@ def generate_text_summary():
         free_slots = [s for s in slots if isinstance(s[2], str) and s[2].strip() == "Free"]
 
         if free_slots:
-            message += f"{day.strftime('%A, %d %b')}
-"
+            message += f"{day.strftime('%A, %d %b')}\n"
+
             for s in free_slots:
-                message += f"  {s[0]} - {s[1]} ✅ → Book: {CALENDLY_URL}
-"
-            message += "
-"
+                message += f"  {s[0]} - {s[1]} ✅ → Book: {CALENDLY_URL}\n"
+
+            message += "\n"
 
     return message
 

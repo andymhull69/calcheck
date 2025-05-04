@@ -121,7 +121,7 @@ def generate_text_summary():
             continue
 
         slots = get_slots_with_status(CALENDAR_ID, day, WORK_START, WORK_END)
-        free_slots = [s for s in slots if s[2] == "Free"]
+        free_slots = [s for s in slots if s[2] == "Free" or s[2] == "Free" or (isinstance(s[2], str) and 'Free' in s[2])]
 
         if free_slots:
             message += f"{day.strftime('%A, %d %b')}

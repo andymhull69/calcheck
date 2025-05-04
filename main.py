@@ -111,7 +111,9 @@ def generate_weekly_slots():
 def generate_text_summary():
     tz = pytz.timezone(TIMEZONE)
     today = datetime.now(tz).date()
-    message = "🗕 1-Hour Time Slots for This Week (✅ = Free, ❌ = Booked):\n\n"
+    message = "🗕 Available 1-Hour Free Slots This Week:
+
+"
 
     for i in range(7):
         day = today + timedelta(days=i)
@@ -119,16 +121,16 @@ def generate_text_summary():
             continue
 
         slots = get_slots_with_status(CALENDAR_ID, day, WORK_START, WORK_END)
-        message += f"{day.strftime('%A, %d %b')}\n"
-        if slots:
-            for s in slots:
-                if s[2] == "Free":
-                    message += f"  {s[0]} - {s[1]} ✅\n"
-                else:
-                    message += f"  {s[0]} - {s[1]} ❌ {s[2]}\n"
-        else:
-            message += "  No 1-hour slots\n"
-        message += "\n"
+        free_slots = [s for s in slots if s[2] == "Free"]
+
+        if free_slots:
+            message += f"{day.strftime('%A, %d %b')}
+"
+            for s in free_slots:
+                message += f"  {s[0]} - {s[1]} ✅ → Book: {CALENDLY_URL}
+"
+            message += "
+"
 
     return message
 

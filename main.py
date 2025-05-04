@@ -126,7 +126,8 @@ def generate_text_summary():
             message += f"{day.strftime('%A, %d %b')}\n"
 
             for s in free_slots:
-                message += f"  {s[0]} - {s[1]} ✅ → Book: {CALENDLY_URL}\n"
+                message += f"  {s[0]} - {s[1]} ✅ → [Book this]({CALENDLY_URL})/"
+
 
             message += "\n"
 

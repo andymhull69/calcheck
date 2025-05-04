@@ -84,7 +84,8 @@ def send_telegram_message(text):
     url = f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage'
     payload = {
         'chat_id': TELEGRAM_USER_ID,
-        'text': text
+        'text': text,
+        'parse_mode': 'HTML'
     }
     response = requests.post(url, data=payload)
     print("Telegram status code:", response.status_code)
@@ -126,7 +127,8 @@ def generate_text_summary():
             message += f"{day.strftime('%A, %d %b')}\n"
 
             for s in free_slots:
-                message += f"  {s[0]} - {s[1]} ✅ → [Book this]({CALENDLY_URL})\n"
+                message += f"  {s[0]} - {s[1]} ✅ → <a href='{CALENDLY_URL}'>Book this</a>\n"
+
 
 
             message += "\n"

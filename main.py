@@ -82,7 +82,23 @@ def get_slots_with_status(calendar_id, date, work_start, work_end):
         all_slots.append((cursor.time(), slot_end.time(), status, slot_link))
         cursor = slot_end
 
-    return all_slots
+    # Group consecutive free slots
+    grouped_slots = []
+    prev = None
+    for slot in all_slots:
+        if slot[2] != "Free":
+            grouped_slots.append(slot)
+            prev = None
+            continue
+        if prev and prev[2] == "Free" and prev[1] == slot[0]:
+            # Extend the previous free slot
+            prev = (prev[0], slot[1], "Free", CALENDLY_URL)
+            grouped_slots[-1] = prev
+        else:
+            prev = slot
+            grouped_slots.append(slot)
+
+    return grouped_slots
 
 def send_telegram_message(text):
     url = f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage'

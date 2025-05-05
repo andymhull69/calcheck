@@ -10,7 +10,7 @@ from flask import Flask, render_template_string, abort
 # === CONFIG ===
 SERVICE_ACCOUNT_FILE = 'service_account.json'
 CALENDAR_ID = 'ef36429c4a9bdee0b32f09b65483c67e5ab7f472423d19c9ece75a139e0de79c@group.calendar.google.com'
-TIMEZONE = 'Europe/Zurich'
+TIMEZONE = 'Europe/London'
 WORK_START = "09:00"
 WORK_END = "17:00"
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -103,7 +103,7 @@ def generate_weekly_slots():
 
     for i in range(7):
         day = today + timedelta(days=i)
-        if day.weekday() >= 5:
+        if day.weekday() not in [2, 4, 5]:
             continue
         slots = get_slots_with_status(CALENDAR_ID, day, WORK_START, WORK_END)
         weekly_data.append({

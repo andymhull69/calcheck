@@ -200,18 +200,19 @@ def web_output():
 
 def generate_text_summary():
     weekly_data = generate_weekly_slots()
-    message = "📅 Available 1-Hour Free Slots This Week:
-"
+    message = "📅 Available Free Slots This Week:\n"
+
     for day in weekly_data:
         free_slots = [s for s in day['slots'] if s[2] == 'Free']
         if free_slots:
-            message += f"
-{day['date']}
-"
+            message += f"\n{day['date']}\n"
+
             for s in free_slots:
-                message += f"  {s[0]} - {s[1]} ✅ → Book this: {CALENDLY_URL}
-"
+                message += f"  {s[0]} - {s[1]} ✅ → Book this: {CALENDLY_URL}\n"
+
     return message or "No free slots available."
+
+
 
 def send_telegram_message(text):
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"

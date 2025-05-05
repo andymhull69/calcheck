@@ -21,7 +21,13 @@ try:
     print("✅ Connected to iCloud CalDAV")
     print(f"Found {len(calendars)} calendar(s):")
     for calendar in calendars:
-        print("-", calendar.name)
+        if calendar.name.lower() == 'bramhallclinic':
+            print("✅ Using calendar:", calendar.name)
+            selected_calendar = calendar
+            break
+    else:
+        print("❌ Calendar 'bramhallclinic' not found.")
+        selected_calendar = None
 
 except Exception as e:
     print("❌ Failed to connect to iCloud CalDAV:", e)

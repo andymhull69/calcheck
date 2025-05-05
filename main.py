@@ -126,7 +126,7 @@ def web_output():
     <head>
         <title>CH Sports Rehab – Bramhall Clinic</title>
         <style>
-            body { font-family: Arial; padding: 5px; max-width: 1200px; margin: 0 10px; }
+            body { font-family: Arial; padding: 1px; max-width: 1000px; margin: 0 5px; }
             .mobile-banner { display: none; }
             h1 { color: #2c3e50; }
             .days-grid {
@@ -141,9 +141,9 @@ def web_output():
                 border-radius: 10px;
                 padding: 15px;
             }
-            .slot { margin-left: 15px; font-weight: bold; }
+            .slot { margin-left: 5px; font-weight: bold; }
             .free { color: green; }
-            .booked { color: grey; }
+            .booked { color: red; }
             img.logo { width: 120px; margin-bottom: 10px; }
             @media (max-width: 768px) {
                 .mobile-banner {

@@ -30,6 +30,10 @@ app = Flask(__name__)
 
 # === FUNCTIONS ===
 def get_slots_with_status(calendar_id, date, work_start, work_end):
+    if not ((date.weekday() == 2 and time(15, 0) <= time.fromisoformat(work_start) <= time(20, 0)) or
+            (date.weekday() == 4 and time(8, 0) <= time.fromisoformat(work_start) <= time(19, 0)) or
+            (date.weekday() == 5 and time(8, 0) <= time.fromisoformat(work_start) <= time(12, 0))):
+        return []
     tz = pytz.timezone(TIMEZONE)
     start_dt = tz.localize(datetime.combine(date, time.fromisoformat(work_start)))
     end_dt = tz.localize(datetime.combine(date, time.fromisoformat(work_end)))
@@ -46,8 +50,8 @@ def get_slots_with_status(calendar_id, date, work_start, work_end):
 
     all_slots = []
     cursor = start_dt
-    while cursor + timedelta(hours=1) <= end_dt:
-        slot_end = cursor + timedelta(hours=1)
+    while cursor + timedelta(minutes=15) <= end_dt:
+        slot_end = cursor + timedelta(minutes=15)
         status = "Free"
 
         slot_link = CALENDLY_URL if status == "Free" else f"https://calendar.google.com/calendar/u/0/r/day/{cursor.year}/{cursor.month:02}/{cursor.day:02}?pli=1#main_7|{cursor.strftime('%H')}"

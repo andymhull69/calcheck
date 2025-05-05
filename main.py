@@ -74,8 +74,8 @@ def get_free_slots(calendar, day):
 # === DISPLAY FOR TEST ===
 if selected_calendar:
     today = datetime.now().date()
-    print("
-🗓 Free 15-minute slots this week:")
+    print("\n🗓 Free 15-minute slots this week:")
+
     for i in range(7):
         day = today + timedelta(days=i)
         if day.weekday() in [2, 4, 5]:

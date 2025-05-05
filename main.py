@@ -175,9 +175,6 @@ def web_output():
             </div>
         {% endfor %}
         </div>
-                </ul>
-            </div>
-        {% endfor %}
         <br><p><a href="https://calendly.com/ch-sports-rehab/session" target="_blank">Book via Calendly</a></p>
     </body>
     </html>

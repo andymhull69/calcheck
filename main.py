@@ -126,18 +126,35 @@ def web_output():
     <head>
         <title>CH Sports Rehab – Bramhall Clinic</title>
         <style>
-            body { font-family: Arial; padding: 20px; max-width: 900px; margin: auto; }
+            body { font-family: Arial; padding: 20px; max-width: 1200px; margin: auto; }
             h1 { color: #2c3e50; }
-            .day { margin-top: 30px; }
+            .days-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            .day {
+                flex: 1 1 30%;
+                min-width: 300px;
+                background: #f8f8f8;
+                border-radius: 10px;
+                padding: 15px;
+            }
             .slot { margin-left: 15px; font-weight: bold; }
             .free { color: green; }
             .booked { color: grey; }
             img.logo { width: 200px; margin-bottom: 10px; }
+            @media (max-width: 768px) {
+                .days-grid {
+                    flex-direction: column;
+                }
+            }
         </style>
     </head>
     <body>
         <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
         <h1>CH Sports Rehab – Bramhall Clinic</h1>
+        <div class="days-grid">
         {% for day in data %}
             <div class="day">
                 <strong>{{ day.date }}</strong>
@@ -152,6 +169,10 @@ def web_output():
                         {% endif %}
                     </li>
                 {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+        </div>
                 </ul>
             </div>
         {% endfor %}

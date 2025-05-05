@@ -207,6 +207,7 @@ def send_telegram_message(text):
     response = requests.post(url, data=payload)
     print(f"Telegram response: {response.status_code} - {response.text}")
 
+@app.route('/trigger/<secret>')
 def trigger_bot(secret):
     if secret != TRIGGER_SECRET:
         abort(403)

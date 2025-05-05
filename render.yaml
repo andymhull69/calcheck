@@ -1,14 +1,12 @@
 services:
   - type: web
-    name: calendar-bot
+    name: apple-calendar-bot
     env: python
     plan: free
     buildCommand: ""
     startCommand: "python main.py"
     envVars:
-      - key: TELEGRAM_BOT_TOKEN
+      - key: ICLOUD_USERNAME
         sync: false
-      - key: TELEGRAM_USER_ID
-        sync: false
-      - key: TRIGGER_SECRET
+      - key: ICLOUD_APP_PASSWORD
         sync: false

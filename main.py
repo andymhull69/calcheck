@@ -29,10 +29,18 @@ service = build('calendar', 'v3', credentials=creds)
 app = Flask(__name__)
 
 # === FUNCTIONS ===
-def get_slots_with_status(calendar_id, date, work_start, work_end):
-    if not ((date.weekday() == 2 and time(15, 0) <= time.fromisoformat(work_start) <= time(20, 0)) or
-            (date.weekday() == 4 and time(8, 0) <= time.fromisoformat(work_start) <= time(19, 0)) or
-            (date.weekday() == 5 and time(8, 0) <= time.fromisoformat(work_start) <= time(12, 0))):
+def get_slots_with_status(calendar_id, date):
+    day_of_week = date.weekday()
+    if day_of_week == 2:  # Wednesday
+        work_start = "15:00"
+        work_end = "20:00"
+    elif day_of_week == 4:  # Friday
+        work_start = "08:00"
+        work_end = "19:00"
+    elif day_of_week == 5:  # Saturday
+        work_start = "08:00"
+        work_end = "12:00"
+    else:
         return []
     tz = pytz.timezone(TIMEZONE)
     start_dt = tz.localize(datetime.combine(date, time.fromisoformat(work_start)))
@@ -121,7 +129,7 @@ def generate_weekly_slots():
         day = today + timedelta(days=i)
         if day.weekday() not in [2, 4, 5]:
             continue
-        slots = get_slots_with_status(CALENDAR_ID, day, WORK_START, WORK_END)
+        slots = get_slots_with_status(CALENDAR_ID, day)
         weekly_data.append({
             'date': day.strftime('%A, %d %b'),
             'slots': [(s[0].strftime('%H:%M'), s[1].strftime('%H:%M'), s[2], s[3]) for s in slots]
@@ -140,7 +148,7 @@ def generate_text_summary():
         if day.weekday() >= 5:
             continue
 
-        slots = get_slots_with_status(CALENDAR_ID, day, WORK_START, WORK_END)
+        slots = get_slots_with_status(CALENDAR_ID, day)
         free_slots = [s for s in slots if isinstance(s[2], str) and s[2].strip() == "Free"]
 
         if free_slots:

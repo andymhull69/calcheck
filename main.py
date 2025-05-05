@@ -152,8 +152,10 @@ def web_output():
         </style>
     </head>
     <body>
-        <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
-        <h1>CH Sports Rehab – Bramhall Clinic</h1>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
+            <h1 style="margin: 0;">CH Sports Rehab – Bramhall Clinic</h1>
+        </div>
         <div class="days-grid">
         {% for day in data %}
             <div class="day">

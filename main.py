@@ -49,8 +49,7 @@ def get_free_slots(calendar, day):
     if not start_time:
         return []
 
-    tz = day.tzinfo or None
-    start_dt = datetime.combine(day, start_time)
+        start_dt = datetime.combine(day, start_time)
     end_dt = datetime.combine(day, end_time)
 
     results = calendar.date_search(start=start_dt, end=end_dt)

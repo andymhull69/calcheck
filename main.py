@@ -127,6 +127,7 @@ def web_output():
         <title>CH Sports Rehab – Bramhall Clinic</title>
         <style>
             body { font-family: Arial; padding: 20px; max-width: 1000px; margin: auto; }
+            .mobile-banner { display: none; }
             h1 { color: #2c3e50; }
             .days-grid {
                 display: flex;
@@ -145,6 +146,15 @@ def web_output():
             .booked { color: grey; }
             img.logo { width: 120px; margin-bottom: 10px; }
             @media (max-width: 768px) {
+                .mobile-banner {
+                    display: block;
+                    background: #ffd;
+                    text-align: center;
+                    padding: 10px;
+                    font-weight: bold;
+                    border: 1px solid #ccc;
+                    margin-bottom: 15px;
+                }
                 .days-grid {
                     flex-direction: column;
                 }
@@ -157,6 +167,7 @@ def web_output():
         </style>
     </head>
     <body>
+        <div class="mobile-banner">Mobile version</div>
         <div style="display: flex; align-items: center; gap: 20px;">
             <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
             <h1 style="margin: 0;">CH Sports Rehab – Bramhall Clinic</h1>
@@ -180,7 +191,7 @@ def web_output():
             </div>
         {% endfor %}
         </div>
-        <br><p><a href="https://calendly.com/ch-sports-rehab/session" target="_blank">Book via Calendly</a></p>
+        
     </body>
     </html>
     '''

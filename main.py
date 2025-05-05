@@ -126,7 +126,7 @@ def web_output():
     <head>
         <title>CH Sports Rehab – Bramhall Clinic</title>
         <style>
-            body { font-family: Arial; padding: 20px; max-width: 1200px; margin: 0 10px; }
+            body { font-family: Arial; padding: 5px; max-width: 1200px; margin: 0 10px; }
             .mobile-banner { display: none; }
             h1 { color: #2c3e50; }
             .days-grid {
@@ -197,6 +197,21 @@ def web_output():
     '''
     return render_template_string(html_template, data=weekly_data)
 
+
+def generate_text_summary():
+    weekly_data = generate_weekly_slots()
+    message = "📅 Available 1-Hour Free Slots This Week:
+"
+    for day in weekly_data:
+        free_slots = [s for s in day['slots'] if s[2] == 'Free']
+        if free_slots:
+            message += f"
+{day['date']}
+"
+            for s in free_slots:
+                message += f"  {s[0]} - {s[1]} ✅ → Book this: {CALENDLY_URL}
+"
+    return message or "No free slots available."
 
 def send_telegram_message(text):
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"

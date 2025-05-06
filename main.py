@@ -177,7 +177,7 @@ def web_output():
             <div style="grid-column: 2; text-align: center;">
                 <h1 style="margin: 0;">CH Sports Rehab – Bramhall Clinic</h1>
             </div>
-            <div style="grid-column: 3; text-align: right; font-size: 0.9em; color: #666; padding: 30px 10px 10px 0;">
+            <div style="grid-column: 3; text-align: right; font-size: 0.9em; color: #666; display: flex; align-items: end; justify-content: end; padding: 0 10px 10px 0; height: 100%;">
                 Updated: {{ now.strftime('%A %d %b %Y, %H:%M') }}
             </div>
             </div>

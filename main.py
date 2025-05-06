@@ -189,8 +189,7 @@ def web_output():
                 <strong>{{ day.date }}</strong>
                 <ul>
                 {% for slot in day.slots %}
-                    <span style="font-size: 0.85em;"></span>
-                        {% endif %}
+                    <span style="font-size: 0.85em;">{{ slot[2]|safe }}</span>
                     </li>
                 {% endfor %}
                 </ul>

@@ -145,7 +145,7 @@ def web_output():
             .free { color: green; }
             .booked { color: red; }
             img.logo { width: 120px; margin-bottom: 10px; }
-            @media (max-width: 768px) {
+            @media (max-width: 700px) {
                 .mobile-banner {
                     display: block;
                     background: #ffd; border: 2px dashed red;

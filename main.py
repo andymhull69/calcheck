@@ -126,7 +126,7 @@ def web_output():
     <head>
         <title>CH Sports Rehab – Bramhall Clinic</title>
         <style>
-            body { font-family: Arial; padding: 1px; max-width: 1300px; margin: 0 5px; }
+            body { font-family: Arial; padding: 1px; max-width: 1250px; margin: 0 5px; }
             .mobile-banner { display: none; }
             h1 { color: #2c3e50; }
             .days-grid {
@@ -138,7 +138,7 @@ def web_output():
                 flex: 1 1 calc(31% - 5px);
                 min-width: 200px;
                 background: #f8f8f8;
-                border-radius: 1px;
+                border-radius: 5px;
                 padding: 10px;
             }
             .slot { margin-left: 5px; font-weight: bold; }

@@ -127,7 +127,7 @@ def web_output():
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CH Sports Rehab – Bramhall Clinic</title>
         <style>
-            body { font-family: Arial; padding: 1px; max-width: 1250px; margin: 0 5px; }
+            body { font-family: Arial; padding: 1px; max-width: 1250px; margin: 0 5px; overflow-x: hidden; }
             .mobile-banner { display: none; }
             h1 { color: #2c3e50; }
             .days-grid {
@@ -168,6 +168,7 @@ def web_output():
         </style>
     </head>
     <body>
+        <button onclick="location.reload()" style="position: fixed; top: 10px; right: 10px; z-index: 999; padding: 5px 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Refresh</button>
         <div class="mobile-banner">Mobile version</div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
             <div style="display: flex; align-items: center; gap: 20px;">

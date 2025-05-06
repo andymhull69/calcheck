@@ -135,7 +135,7 @@ def web_output():
                 gap: 20px;
             }
             .day {
-                flex: 1 1 calc(30% - 10px);
+                flex: 1 1 calc(32% - 10px);
                 min-width: 200px;
                 background: #f8f8f8;
                 border-radius: 5px;

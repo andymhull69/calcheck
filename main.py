@@ -124,6 +124,7 @@ def web_output():
     <!DOCTYPE html>
     <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CH Sports Rehab – Bramhall Clinic</title>
         <style>
             body { font-family: Arial; padding: 1px; max-width: 1250px; margin: 0 5px; }

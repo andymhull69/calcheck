@@ -189,7 +189,14 @@ def web_output():
                 <strong>{{ day.date }}</strong>
                 <ul>
                 {% for slot in day.slots %}
-                    {% if slot[2] == 'Free' %}<span class="free">Free</span>{% else %}<span class="booked" style="font-size: 0.85em;">{{ slot[2]|safe }}</span>{% endif %}
+                    <li class="slot">
+                        {{ slot[0] }} - {{ slot[1] }} →
+                        {% if slot[2] == 'Free' %}
+                            <span class="free">Free</span>
+                            <a href="{{ slot[3] }}" target="_blank">Book this</a>
+                        {% else %}
+                            <span class="booked" style="font-size: 0.85em;">{{ slot[2]|safe }}</span>
+                        {% endif %}
                     </li>
                 {% endfor %}
                 </ul>

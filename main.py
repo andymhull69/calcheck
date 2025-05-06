@@ -170,10 +170,16 @@ def web_output():
     <body>
         <button onclick="location.reload()" style="position: fixed; top: 10px; right: 10px; z-index: 999; padding: 5px 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Refresh</button>
         <div class="mobile-banner">Mobile version</div>
-        <header style="position: sticky; top: 0; background: white; z-index: 1000; padding: 10px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid #ccc;">
-            <div style="display: flex; align-items: center; gap: 20px;">
-            <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
-            <h1 style="margin: 0;">CH Sports Rehab – Bramhall Clinic</h1>
+        <header style="position: sticky; top: 0; background: white; z-index: 1000; padding: 10px 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid #ccc;">
+            <div style="grid-column: 1; display: flex; align-items: center; gap: 10px;">
+                <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
+            </div>
+            <div style="grid-column: 2; text-align: center;">
+                <h1 style="margin: 0;">CH Sports Rehab – Bramhall Clinic</h1>
+            </div>
+            <div style="grid-column: 3; text-align: right; font-size: 0.9em; color: #666; padding-right: 10px;">
+                Updated: {{ now.strftime('%A %d %b %Y, %H:%M') }}
+            </div>
             </div>
             <div style="text-align: right; font-size: 0.9em; color: #666;">
                 Updated: {{ now.strftime('%A %d %b %Y, %H:%M') }}

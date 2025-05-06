@@ -171,7 +171,7 @@ def web_output():
         <button onclick="location.reload()" style="position: fixed; top: 60px; right: 10px; z-index: 1001; padding: 5px 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Refresh</button>
         <div class="mobile-banner">Mobile version</div>
         <header style="position: sticky; top: 0; background: white; z-index: 1000; padding: 10px 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid #ccc;">
-            <div style="grid-column: 1; display: flex; align-items: center; gap: 10px;">
+            <div style="grid-column: 1; display: flex; align-items: center; gap: 10px; padding-left: 10px;">
                 <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
             </div>
             <div style="grid-column: 2; text-align: center;">

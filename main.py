@@ -181,9 +181,7 @@ def web_output():
                 Updated: {{ now.strftime('%A %d %b %Y, %H:%M') }}
             </div>
             </div>
-            <div style="text-align: right; font-size: 0.9em; color: #666;">
-                Updated: {{ now.strftime('%A %d %b %Y, %H:%M') }}
-            </div>
+            
         </header>
         <div class="days-grid">
         {% for day in data %}

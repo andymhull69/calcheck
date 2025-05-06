@@ -169,9 +169,14 @@ def web_output():
     </head>
     <body>
         <div class="mobile-banner">Mobile version</div>
-        <div style="display: flex; align-items: center; gap: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 20px;">
             <img src="https://raw.githubusercontent.com/andymhull69/calcheck/feb25330be251d81bb19a19ee197fc906eb5ab59/CHsportrehab.jpeg" class="logo" alt="CH Sports Rehab Logo">
             <h1 style="margin: 0;">CH Sports Rehab – Bramhall Clinic</h1>
+            </div>
+            <div style="text-align: right; font-size: 0.9em; color: #666;">
+                Updated: {{ now.strftime('%A %d %b %Y, %H:%M') }}
+            </div>
         </div>
         <div class="days-grid">
         {% for day in data %}
@@ -196,7 +201,9 @@ def web_output():
     </body>
     </html>
     '''
-    return render_template_string(html_template, data=weekly_data)
+    from datetime import datetime as dt
+    now = dt.now(pytz.timezone(TIMEZONE))
+    return render_template_string(html_template, data=weekly_data, now=now)
 
 
 def generate_text_summary():

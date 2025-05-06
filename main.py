@@ -135,10 +135,10 @@ def web_output():
                 gap: 20px;
             }
             .day {
-                flex: 1 1 calc(31% - 10px);
+                flex: 1 1 calc(31% - 5px);
                 min-width: 200px;
                 background: #f8f8f8;
-                border-radius: 5px;
+                border-radius: 1px;
                 padding: 10px;
             }
             .slot { margin-left: 5px; font-weight: bold; }

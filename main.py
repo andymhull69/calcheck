@@ -78,10 +78,9 @@ def get_slots_with_status(calendar_id, date):
                     parts = description.split("Please share anything that will help prepare me for your appointment.")
                     if len(parts) > 1:
                         prep_text = parts[1].strip().splitlines()[0].lstrip(':').strip()
-                status = f"{client_contact}<br><details><summary>More details</summary><small>{prep_text}</small></details>" if client_contact else "Booked"
-               
-                              slot_link = f"https://calendar.google.com/calendar/u/0/r/day/{cursor.year}/{cursor.month:02}/{cursor.day:02}?pli=1#main_7|{cursor.strftime('%H')}"
-                break
+               status = f"{client_contact}<br><details><summary>More details</summary><small>{prep_text}</small></details>" if client_contact else "Booked"
+               slot_link = f"https://calendar.google.com/calendar/u/0/r/day/{cursor.year}/{cursor.month:02}/{cursor.day:02}?pli=1#main_7|{cursor.strftime('%H')}"
+               break
 
 
         all_slots.append((cursor.time(), slot_end.time(), status, slot_link))

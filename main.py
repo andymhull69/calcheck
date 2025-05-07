@@ -268,7 +268,10 @@ def show_responses():
     sh = gc.open("New Patient Form  (Responses)")
     ws = sh.sheet1
     records = ws.get_all_records()
-    filtered = [row for row in records if row.get("Email Address") == email]
+    filtered = [
+        row for row in records
+        if row.get("Email Address", "").strip().lower() == email.strip().lower()
+    ]
 
     html = f"<h2>Form Responses for {email}</h2><ul>"
     for row in filtered:

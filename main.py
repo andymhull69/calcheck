@@ -84,7 +84,7 @@ def get_slots_with_status(calendar_id, date):
                     for line in description.splitlines():
                        if line.strip().startswith("Form:"):
                          form_link = line.split("Form:", 1)[1].strip()
-              status = f"{client_contact}<br><details><summary>More details</summary><small>{prep_text}" + (f"<br><a href='{form_link}' target='_blank'>📄 View Form</a>" if form_link else "") + "</small></details>" if client_contact else "Booked"
+                                  status = f"{client_contact}<br><details><summary>More details</summary><small>{prep_text}" + (f"<br><a href='{form_link}' target='_blank'>📄 View Form</a>" if form_link else "") + "</small></details>" if client_contact else "Booked"
                 slot_link = f"https://calendar.google.com/calendar/u/0/r/day/{cursor.year}/{cursor.month:02}/{cursor.day:02}?pli=1#main_7|{cursor.strftime('%H')}"
                 break
 

@@ -5,7 +5,8 @@ import pytz
 import requests
 import os
 import sys
-from flask import Flask, render_template_string, abort
+from flask import Flask, render_template_string, abort, request
+import gspread
 
 # === CONFIG ===
 SERVICE_ACCOUNT_FILE = 'service_account.json'
@@ -197,6 +198,13 @@ def web_output():
                             <a href="{{ slot[3] }}" target="_blank">Book this</a>
                         {% else %}
                             <span class="booked" style="font-size: 0.85em;">{{ slot[2]|safe }}</span>
+                            {% set match = slot[2]|safe %}
+                            {% if 'mailto:' in match %}
+                                {% set email_start = match.find('mailto:') + 7 %}
+                                {% set email_end = match.find("'", email_start) %}
+                                {% set email = match[email_start:email_end] %}
+                                <a href="/responses?email={{ email }}" target="_blank">View Form Responses</a>
+                            {% endif %}
                         {% endif %}
                     </li>
                 {% endfor %}
@@ -250,5 +258,23 @@ def trigger_bot(secret):
 def health():
     return "OK", 200
 
-if __name__ == '__main__':
+@app.route('/responses')
+def show_responses():
+    email = request.args.get('email')
+    if not email:
+        return "Missing email", 400
+
+    gc = gspread.service_account(filename=SERVICE_ACCOUNT_FILE)
+    sh = gc.open("New Patient Form  (Responses)")
+    ws = sh.sheet1
+    records = ws.get_all_records()
+    filtered = [row for row in records if row.get("Email Address") == email]
+
+    html = f"<h2>Form Responses for {email}</h2><ul>"
+    for row in filtered:
+        html += "<li>" + ", ".join(f"{k}: {v}" for k, v in row.items()) + "</li>"
+    html += "</ul>"
+    return html
+
+
     app.run(host='0.0.0.0', port=81)

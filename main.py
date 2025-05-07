@@ -8,7 +8,7 @@ import sys
 from flask import Flask, render_template_string, abort, request
 import gspread
 
-# === CONFIG ====
+# === CONFIG ===
 SERVICE_ACCOUNT_FILE = 'service_account.json'
 CALENDAR_ID = 'ef36429c4a9bdee0b32f09b65483c67e5ab7f472423d19c9ece75a139e0de79c@group.calendar.google.com'
 TIMEZONE = 'Europe/London'
@@ -276,5 +276,4 @@ def show_responses():
     html += "</ul>"
     return html
 
-
-    app.run(host='0.0.0.0', port=81)
+app.run(host='0.0.0.0', port=81)

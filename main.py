@@ -272,10 +272,11 @@ def show_responses():
         row for row in records
         if row.get("Email Address", "").strip().lower() == email.strip().lower()
     ]
+    filtered.sort(key=lambda r: r.get("Timestamp", ""), reverse=True)
 
-    html = f"<h2>Form Responses for {email}</h2><ul>"
+    html = f"<h2>Form Responses for {email}</h2><ul style='list-style:none;padding-left:0;'>"
     for row in filtered:
-        html += "<li>" + ", ".join(f"{k}: {v}" for k, v in row.items()) + "</li>"
+            html += "<li><details><summary><strong>" + row.get("Timestamp", "") + "</strong> — " + row.get("Name", "") + "</summary><ul>" + "".join(f"<li><strong>{k}:</strong> {v}</li>" for k, v in row.items() if k not in ['Timestamp', 'Name']) + "</ul></details></li>"
     html += "</ul>"
     return html
 

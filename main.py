@@ -74,8 +74,8 @@ def get_slots_with_status(calendar_id, date):
                         break
                 description = event.get('description', '')
                 prep_text = ""
-                if "Please share anything that will help prepare me for your appointment" in description:
-                    parts = description.split("Please share anything that will help prepare me for your appointment")
+                if "Please share anything that will help prepare me for your appointment.:" in description:
+                    parts = description.split("Please share anything that will help prepare me for your appointment.:")
                     if len(parts) > 1:
                         prep_text = parts[1].strip().splitlines()[0].lstrip(':').strip()
                 status = f"{client_contact}<br><details><summary>More details</summary><small>{prep_text}</small></details>" if client_contact else "Booked"

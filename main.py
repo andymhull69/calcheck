@@ -24,6 +24,7 @@ creds = service_account.Credentials.from_service_account_file(
 service = build('calendar', 'v3', credentials=creds)
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # protect against overly large posts
 
 # === FUNCTIONS ===
 def get_slots_with_status(calendar_id, date):
@@ -259,6 +260,34 @@ def health():
     return "OK", 200
 
 @app.route('/responses')
+from flask import redirect, url_for
+
+@app.route('/update_session', methods=['POST'])
+def update_session():
+    email = request.form.get('email')
+    timestamp = request.form.get('timestamp')
+    new_details = request.form.get('session_details', '')
+
+    gc = gspread.service_account(filename=SERVICE_ACCOUNT_FILE)
+    sh = gc.open("New Patient Form  (Responses)")
+    ws = sh.sheet1
+    records = ws.get_all_records()
+    headers = ws.row_values(1)
+
+    # Find matching row
+    for idx, row in enumerate(records):
+        if (row.get("Email Address", "").strip().lower() == email.strip().lower() and
+            row.get("Timestamp") == timestamp):
+            cell_row = idx + 2  # account for header
+            if "session details" not in headers:
+                ws.update_cell(1, len(headers) + 1, "session details")
+                headers.append("session details")
+            col = headers.index("session details") + 1
+            ws.update_cell(cell_row, col, new_details)
+            break
+    return redirect(url_for('show_responses', email=email))
+
+
 def show_responses():
     email = request.args.get('email')
     if not email:
@@ -298,7 +327,21 @@ def show_responses():
             f"<li><strong>{k}:</strong> {v}</li>"
             for k, v in row.items() if k not in ['Timestamp', 'Full name']
         )
-        html += f"<li><details><summary><strong>{timestamp}</strong> — {name}</summary><ul>{other_details}</ul></details></li>"
+                session_details = row.get("session details", "")
+        html += f"""
+        <li>
+            <details>
+                <summary><strong>{timestamp}</strong> — {name}</summary>
+                <ul>{other_details}</ul>
+                <form method='POST' action='/update_session' style='margin-top: 10px;'>
+                    <input type='hidden' name='email' value='{email}'>
+                    <input type='hidden' name='timestamp' value='{timestamp}'>
+                    <label><strong>Session Details:</strong></label><br>
+                    <textarea name='session_details' rows='2' cols='60'>{session_details}</textarea><br>
+                    <button type='submit'>Save</button>
+                </form>
+            </details>
+        </li>"
     html += "</ul>"
     return html
 

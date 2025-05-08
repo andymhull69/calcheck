@@ -489,8 +489,8 @@ def client_admin():
             timestamp = row.get("Timestamp", "")
             html += f"""
             <div class='card'>
-                <strong style='color: darkred;'>\{row.get('Full name', '')\}</strong><br>
-                <strong style='color: darkred;'>\{email\}</strong><br>
+                <strong style='color: darkred;'>{row.get('Full name', '')}</strong><br>
+                <strong style='color: darkred;'>{email}</strong><br>
                 <form method='POST' action='/update_session'>
                     <input type='hidden' name='email' value='{email}'>
                     <input type='hidden' name='timestamp' value='{timestamp}'>

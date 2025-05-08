@@ -350,7 +350,7 @@ def update_session():
 @app.route('/responses')
 def show_responses():
     try:
-    email = request.args.get('email')
+        email = request.args.get('email')
     if not email:
         return "Missing email", 400
 

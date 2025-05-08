@@ -351,75 +351,75 @@ def update_session():
 def show_responses():
     try:
         email = request.args.get('email')
-    if not email:
-        return "Missing email", 400
+        if not email:
+            return "Missing email", 400
 
-    gc = gspread.service_account(filename=SERVICE_ACCOUNT_FILE)
-    sh = gc.open("New Patient Form  (Responses)")
-    ws = sh.sheet1
-    records = ws.get_all_records()
-    filtered = [
-        row for row in records
-        if row.get("Email Address", "").strip().lower() == email.strip().lower()
-    ]
-    filtered.sort(key=lambda r: r.get("Timestamp", ""), reverse=True)
+        gc = gspread.service_account(filename=SERVICE_ACCOUNT_FILE)
+        sh = gc.open("New Patient Form  (Responses)")
+        ws = sh.sheet1
+        records = ws.get_all_records()
+        filtered = [
+            row for row in records
+            if row.get("Email Address", "").strip().lower() == email.strip().lower()
+        ]
+        filtered.sort(key=lambda r: r.get("Timestamp", ""), reverse=True)
 
-    html = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Form Responses for {email}</title>
-    <style>
-        body {{ font-family: Arial, sans-serif; padding: 20px; background: #f0f2f5; color: #333; }}
-        h2 {{ margin-bottom: 20px; }}
-        ul {{ list-style: none; padding: 0; }}
-        details {{ margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; background: #fff; padding: 10px; }}
-        summary {{ cursor: pointer; font-weight: bold; font-size: 1.05em; }}
-        li li {
-            margin-left: 15px;
-            padding: 2px 0;
-        }
-        li li strong {
-            color: darkred;
-        }
-    </style>
-    </head>
-    <body>
-    <h2>Form Responses for {email}</h2>
-    <ul>
-    """
-
-    for row in filtered:
-        timestamp = row.get("Timestamp", "Unknown date/time")
-        name = row.get("Full name", "Unknown name")
-        session_details = row.get("session details", "")
-        other_details = "".join(
-            f"<li><strong>{k}:</strong> {v}</li>"
-            for k, v in row.items() if k not in ['Timestamp', 'Full name']
-        )
-
-        html += f"""
-        <li class="card">
-            <details>
-                <summary><strong>{timestamp}</strong> - {name}</summary>
-                <ul>{other_details}</ul>
-                <form method='POST' action='/update_session' style='margin-top: 10px;'>
-                    <input type='hidden' name='email' value='{email}'>
-                    <input type='hidden' name='timestamp' value='{timestamp}'>
-                    <label><strong>Session Details:</strong></label><br>
-                    <textarea name='session_details' rows='2' cols='60'>{session_details}</textarea><br>
-                    <button type='submit' class='save-btn'>Save</button>
-                </form>
-            </details>
-        </li>
+        html = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>Form Responses for {email}</title>
+        <style>
+            body {{ font-family: Arial, sans-serif; padding: 20px; background: #f0f2f5; color: #333; }}
+            h2 {{ margin-bottom: 20px; }}
+            ul {{ list-style: none; padding: 0; }}
+            details {{ margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; background: #fff; padding: 10px; }}
+            summary {{ cursor: pointer; font-weight: bold; font-size: 1.05em; }}
+            li li {{
+                margin-left: 15px;
+                padding: 2px 0;
+            }}
+            li li strong {{
+                color: darkred;
+            }}
+        </style>
+        </head>
+        <body>
+        <h2>Form Responses for {email}</h2>
+        <ul>
         """
 
-    html += """
-    </ul>
-    </body>
-    </html>
-    """
-            return html
+        for row in filtered:
+            timestamp = row.get("Timestamp", "Unknown date/time")
+            name = row.get("Full name", "Unknown name")
+            session_details = row.get("session details", "")
+            other_details = "".join(
+                f"<li><strong>{k}:</strong> {v}</li>"
+                for k, v in row.items() if k not in ['Timestamp', 'Full name']
+            )
+
+            html += f"""
+            <li class="card">
+                <details>
+                    <summary><strong>{timestamp}</strong> - {name}</summary>
+                    <ul>{other_details}</ul>
+                    <form method='POST' action='/update_session' style='margin-top: 10px;'>
+                        <input type='hidden' name='email' value='{email}'>
+                        <input type='hidden' name='timestamp' value='{timestamp}'>
+                        <label><strong>Session Details:</strong></label><br>
+                        <textarea name='session_details' rows='2' cols='60'>{session_details}</textarea><br>
+                        <button type='submit' class='save-btn'>Save</button>
+                    </form>
+                </details>
+            </li>
+            """
+
+        html += """
+        </ul>
+        </body>
+        </html>
+        """
+        return html
     except Exception as e:
         print(f"[ERROR] /responses failed: {e}")
         return "An error occurred while loading form responses.", 500

@@ -360,7 +360,7 @@ def show_responses():
         }
         li li strong {
             color: darkred;
-        }}
+        }
     </style>
     </head>
     <body>

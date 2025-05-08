@@ -330,7 +330,7 @@ def show_responses():
         html += f"""
         <li>
             <details>
-                <summary><strong>{timestamp}</strong> — {name}</summary>
+                <summary><strong>{timestamp}</strong> - {name}</summary>
                 <ul>{other_details}</ul>
                 <form method='POST' action='/update_session' style='margin-top: 10px;'>
                     <input type='hidden' name='email' value='{email}'>

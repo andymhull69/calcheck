@@ -293,12 +293,12 @@ def show_responses():
     <ul>"""
     for row in filtered:
         timestamp = row.get("Timestamp", "Unknown date/time")
-        name = row.get("Name", "Unknown name")
+        name = row.get("Full name", "Unknown name")
         other_details = "".join(
             f"<li><strong>{k}:</strong> {v}</li>"
             for k, v in row.items() if k not in ['Timestamp', 'Name']
         )
-        html += f"<li><details><summary><strong>{timestamp}</strong> — {name}</summary><ul>{other_details}</ul></details></li>""
+        html += f"<li><details><summary><strong>{timestamp}</strong> — {name}</summary><ul>{other_details}</ul></details></li>"
     html += "</ul>"
     return html
 

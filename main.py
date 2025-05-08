@@ -246,6 +246,7 @@ def web_output():
             </div>
             
         </header>
+        <a href="/client-admin" target="_blank" style="display:inline-block; margin: 10px 0; padding: 6px 12px; background-color: #444; color: white; border-radius: 4px; text-decoration: none;">Client Admin</a>
         <div class="days-grid">
         {% for day in data %}
             <div class="day">
@@ -423,6 +424,89 @@ def show_responses():
     except Exception as e:
         print(f"[ERROR] /responses failed: {e}")
         return "An error occurred while loading form responses.", 500
+
+@app.route('/client-admin')
+def client_admin():
+    try:
+        query = request.args.get("query", "").strip().lower()
+        gc = gspread.service_account(filename=SERVICE_ACCOUNT_FILE)
+        sh = gc.open("New Patient Form  (Responses)")
+        ws = sh.sheet1
+        headers = ws.row_values(1)
+        records = ws.get_all_records()
+
+        if query:
+            filtered = [r for r in records if query in r.get("Email Address", "").lower() or query in r.get("Full name", "").lower()]
+        else:
+            filtered = []
+
+        html = '''
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>Client Administration</title>
+        <style>
+            body { font-family: Arial, sans-serif; padding: 20px; background: #f0f2f5; color: #333; }
+            input[type="text"] {
+                padding: 8px;
+                width: 300px;
+                font-size: 1em;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+                margin-right: 10px;
+            }
+            button {
+                padding: 8px 14px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .card {
+                background: white; padding: 15px; margin-top: 20px; border-radius: 6px; border: 1px solid #ccc;
+            }
+            textarea { width: 100%; font-family: Arial; }
+        </style>
+        </head>
+        <body>
+        <h2>Client Administration</h2>
+        <form method="GET" action="/client-admin">
+            <input type="text" name="query" placeholder="Search name or email" required>
+            <button type="submit">Search</button>
+        </form>
+        '''
+
+        for row in filtered:
+            email = row.get("Email Address", "")
+            timestamp = row.get("Timestamp", "")
+            html += f"""
+            <div class='card'>
+                <strong>{row.get('Full name', '')}</strong><br>
+                <em>{email}</em><br>
+                <form method='POST' action='/update_session'>
+                    <input type='hidden' name='email' value='{email}'>
+                    <input type='hidden' name='timestamp' value='{timestamp}'>
+                    <ul>
+            """
+            for k, v in row.items():
+                if k not in ['Timestamp', 'Full name', 'Email Address']:
+                    html += f"<li><strong>{k}:</strong><br><textarea name='field_{k}' rows='2'>{v}</textarea></li>"
+            html += """
+                    </ul>
+                    <button type='submit'>Save</button>
+                </form>
+            </div>
+            """
+
+        html += "</body></html>"
+        return html
+    except Exception as e:
+        print(f"[ERROR] /client-admin failed: {e}")
+        return "Error loading client admin page", 500
+    </body>
+    </html>
+    '''
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81)

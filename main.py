@@ -296,7 +296,7 @@ def show_responses():
         name = row.get("Full name", "Unknown name")
         other_details = "".join(
             f"<li><strong>{k}:</strong> {v}</li>"
-            for k, v in row.items() if k not in ['Timestamp', 'Name']
+            for k, v in row.items() if k not in ['Timestamp', 'Full name']
         )
         html += f"<li><details><summary><strong>{timestamp}</strong> — {name}</summary><ul>{other_details}</ul></details></li>"
     html += "</ul>"

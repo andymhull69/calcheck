@@ -352,7 +352,7 @@ def update_session():
                         col_idx = headers.index(field_name) + 1
                         ws.update_cell(cell_row, col_idx, value)
             break
-    return '''<html><head><meta http-equiv="refresh" content="2;url=/responses?email={}" /></head><body><h3 style="color: green;">✅ Changes saved! Redirecting...</h3></body></html>'''.format(email)
+    return '''<html><head><meta http-equiv="refresh" content="2;url=/client-admin?query={}" /></head><body><h3 style="color: green;">✅ Changes saved! Redirecting to Client Admin...</h3></body></html>'''.format(email)
 
 
 @app.route('/responses')

@@ -344,8 +344,15 @@ def update_session():
                 headers.append("session details")
             col = headers.index("session details") + 1
             ws.update_cell(cell_row, col, new_details)
+            # Update all other fields
+            for key, value in request.form.items():
+                if key.startswith('field_'):
+                    field_name = key[6:]
+                    if field_name in headers:
+                        col_idx = headers.index(field_name) + 1
+                        ws.update_cell(cell_row, col_idx, value)
             break
-    return redirect(url_for('show_responses', email=email))
+    return '''<html><head><meta http-equiv="refresh" content="2;url=/responses?email={}" /></head><body><h3 style="color: green;">✅ Changes saved! Redirecting...</h3></body></html>'''.format(email)
 
 
 @app.route('/responses')

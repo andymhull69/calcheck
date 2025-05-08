@@ -184,7 +184,7 @@ def web_output():
         }
         button {
             margin-top: 5px;
-            background: #007BFF;
+            background: #28a745;
             color: #fff;
             border: none;
             padding: 6px 12px;
@@ -192,7 +192,7 @@ def web_output():
             cursor: pointer;
         }
         button:hover {
-            background: #0056b3;
+            background: #218838;
         }
         </style>
 

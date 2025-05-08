@@ -168,7 +168,33 @@ def web_output():
                     margin-bottom: 20px;
                 }
             }
-        </style>
+        
+        li { margin-bottom: 20px; }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            font-family: Arial;
+        }
+        button {
+            margin-top: 5px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+
     </head>
     <body>
         <button onclick="location.reload()" style="position: fixed; top: 60px; right: 10px; z-index: 1001; padding: 5px 10px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Refresh</button>
@@ -332,7 +358,7 @@ def show_responses():
         )
 
         html += f"""
-        <li>
+        <li class="card">
             <details>
                 <summary><strong>{timestamp}</strong> - {name}</summary>
                 <ul>{other_details}</ul>

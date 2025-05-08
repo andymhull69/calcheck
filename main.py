@@ -274,7 +274,23 @@ def show_responses():
     ]
     filtered.sort(key=lambda r: r.get("Timestamp", ""), reverse=True)
 
-    html = f"<h2>Form Responses for {email}</h2><ul style='list-style:none;padding-left:0;'>"
+    html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Form Responses for {email}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f2f5; color: #333; }
+        h2 { margin-bottom: 20px; }
+        ul { list-style: none; padding: 0; }
+        details { margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; background: #fff; padding: 10px; }
+        summary { cursor: pointer; font-weight: bold; font-size: 1.05em; }
+        li li { margin-left: 15px; padding: 2px 0; }
+    </style>
+    </head>
+    <body>
+    <h2>Form Responses for {email}</h2>
+    <ul>"""
     for row in filtered:
             html += "<li><details><summary><strong>" + row.get("Timestamp", "") + "</strong> — " + row.get("Name", "") + "</summary><ul>" + "".join(f"<li><strong>{k}:</strong> {v}</li>" for k, v in row.items() if k not in ['Timestamp', 'Name']) + "</ul></details></li>"
     html += "</ul>"

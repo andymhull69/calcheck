@@ -318,15 +318,18 @@ def show_responses():
     </head>
     <body>
     <h2>Form Responses for {email}</h2>
-    <ul>"""
+    <ul>
+    """
+
     for row in filtered:
         timestamp = row.get("Timestamp", "Unknown date/time")
         name = row.get("Full name", "Unknown name")
-        other_details = "".join(
-        f"<li><strong>{k}:</strong> {v}</li>"""
-        for k, v in row.items() if k not in ['Timestamp', 'Full name']
-    )
         session_details = row.get("session details", "")
+        other_details = "".join(
+            f"<li><strong>{k}:</strong> {v}</li>"
+            for k, v in row.items() if k not in ['Timestamp', 'Full name']
+        )
+
         html += f"""
         <li>
             <details>
@@ -340,8 +343,14 @@ def show_responses():
                     <button type='submit'>Save</button>
                 </form>
             </details>
-        </li>"
-    html += "</ul>"
+        </li>
+        """
+
+    html += """
+    </ul>
+    </body>
+    </html>
+    """
     return html
 
 if __name__ == '__main__':

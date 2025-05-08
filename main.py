@@ -195,6 +195,18 @@ def web_output():
         button:hover {
             background-color: #218838;
         }
+        .save-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .save-btn:hover {
+            background-color: #218838;
+        }
         </style>
 
     </head>
@@ -369,7 +381,7 @@ def show_responses():
                     <input type='hidden' name='timestamp' value='{timestamp}'>
                     <label><strong>Session Details:</strong></label><br>
                     <textarea name='session_details' rows='2' cols='60'>{session_details}</textarea><br>
-                    <button type='submit'>Save</button>
+                    <button type='submit' class='save-btn'>Save</button>
                 </form>
             </details>
         </li>

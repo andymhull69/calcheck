@@ -280,12 +280,12 @@ def show_responses():
     <head>
     <title>Form Responses for {email}</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f2f5; color: #333; }
-        h2 { margin-bottom: 20px; }
-        ul { list-style: none; padding: 0; }
-        details { margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; background: #fff; padding: 10px; }
-        summary { cursor: pointer; font-weight: bold; font-size: 1.05em; }
-        li li { margin-left: 15px; padding: 2px 0; }
+        body {{ font-family: Arial, sans-serif; padding: 20px; background: #f0f2f5; color: #333; }}
+        h2 {{ margin-bottom: 20px; }}
+        ul {{ list-style: none; padding: 0; }}
+        details {{ margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; background: #fff; padding: 10px; }}
+        summary {{ cursor: pointer; font-weight: bold; font-size: 1.05em; }}
+        li li {{ margin-left: 15px; padding: 2px 0; }}
     </style>
     </head>
     <body>

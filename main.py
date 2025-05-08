@@ -184,15 +184,16 @@ def web_output():
         }
         button {
             margin-top: 5px;
-            background: #28a745;
+            background-color: #28a745;
             color: #fff;
             border: none;
             padding: 6px 12px;
             border-radius: 4px;
+            font-size: 1em;
             cursor: pointer;
         }
         button:hover {
-            background: #218838;
+            background-color: #218838;
         }
         </style>
 

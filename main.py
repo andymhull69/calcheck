@@ -504,9 +504,6 @@ def client_admin():
     except Exception as e:
         print(f"[ERROR] /client-admin failed: {e}")
         return "Error loading client admin page", 500
-    </body>
-    </html>
-    '''
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81)

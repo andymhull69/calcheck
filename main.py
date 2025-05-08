@@ -354,7 +354,13 @@ def show_responses():
         ul {{ list-style: none; padding: 0; }}
         details {{ margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; background: #fff; padding: 10px; }}
         summary {{ cursor: pointer; font-weight: bold; font-size: 1.05em; }}
-        li li {{ margin-left: 15px; padding: 2px 0; }}
+        li li {
+            margin-left: 15px;
+            padding: 2px 0;
+        }
+        li li strong {
+            color: darkred;
+        }}
     </style>
     </head>
     <body>

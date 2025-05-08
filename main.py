@@ -292,7 +292,13 @@ def show_responses():
     <h2>Form Responses for {email}</h2>
     <ul>"""
     for row in filtered:
-            html += "<li><details><summary><strong>" + row.get("Timestamp", "") + "</strong> — " + row.get("Name", "") + "</summary><ul>" + "".join(f"<li><strong>{k}:</strong> {v}</li>" for k, v in row.items() if k not in ['Timestamp', 'Name']) + "</ul></details></li>"
+        timestamp = row.get("Timestamp", "Unknown date/time")
+        name = row.get("Name", "Unknown name")
+        other_details = "".join(
+            f"<li><strong>{k}:</strong> {v}</li>"
+            for k, v in row.items() if k not in ['Timestamp', 'Name']
+        )
+        html += f"<li><details><summary><strong>{timestamp}</strong> — {name}</summary><ul>{other_details}</ul></details></li>""
     html += "</ul>"
     return html
 

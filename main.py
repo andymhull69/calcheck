@@ -287,6 +287,7 @@ def update_session():
     return redirect(url_for('show_responses', email=email))
 
 
+@app.route('/responses')
 def show_responses():
     email = request.args.get('email')
     if not email:

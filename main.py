@@ -207,7 +207,27 @@ def web_output():
         .save-btn:hover {
             background-color: #218838;
         }
-        </style>
+                .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .save-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .save-btn:hover {
+            background-color: #218838;
+        }
+    </style>
 
     </head>
     <body>
@@ -329,6 +349,7 @@ def update_session():
 
 @app.route('/responses')
 def show_responses():
+    try:
     email = request.args.get('email')
     if not email:
         return "Missing email", 400
@@ -398,7 +419,10 @@ def show_responses():
     </body>
     </html>
     """
-    return html
+            return html
+    except Exception as e:
+        print(f"[ERROR] /responses failed: {e}")
+        return "An error occurred while loading form responses.", 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=81)

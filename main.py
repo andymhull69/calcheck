@@ -323,9 +323,9 @@ def show_responses():
         timestamp = row.get("Timestamp", "Unknown date/time")
         name = row.get("Full name", "Unknown name")
         other_details = "".join(
-            f"<li><strong>{k}:</strong> {v}</li>
-            for k, v in row.items() if k not in ['Timestamp', 'Full name']
-        )
+        f"<li><strong>{k}:</strong> {v}</li>"
+        for k, v in row.items() if k not in ['Timestamp', 'Full name']
+    )
         session_details = row.get("session details", "")
         html += f"""
         <li>
